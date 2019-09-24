@@ -27,7 +27,7 @@ export default function Login() {
           value={values.password}
          />
       </form>
-      <button>
+      <button type="submit" onClick="handleSubmit">
         Submit
       </button>
     </div>
