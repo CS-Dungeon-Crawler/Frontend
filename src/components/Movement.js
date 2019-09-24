@@ -32,6 +32,7 @@ export default function Movement() {
   const DELTA = 5;
 
   container.addEventListener('keydown', function(e) {
+    // 37-left, 38-up, 39-right, 40-down
     if (e.keyCode === 37) {
       circle.x(circle.x() - DELTA);
     } else if (e.keyCode === 38) {

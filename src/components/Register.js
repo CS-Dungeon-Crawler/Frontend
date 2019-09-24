@@ -6,14 +6,15 @@ export default function Register() {
 
   const handleChange = event => {
     const {name, value} = event.target
-    setValues({...value, [name]: value})
+    setValues({...values, [name]: value})
   }
 
   const handleSubmit = event => {
     event.preventDefault()
-    axios.post("https://lambda-mud-test.herokuapp.com/api/registration/", values)
+    axios.post("https://lambdamud-crawler.herokuapp.com/api/login/", values)
       .then(res => {
         console.log(res)
+        localStorage.setItem('token', res.data.token)
       }).catch(err => console.log(err))
   }
 

@@ -1,16 +1,28 @@
-import React, {useState} from 'react'
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
 
-export default function Login() {
+export default function Login(props) {
   const [values, setValues] = useState({username: "", password: ""})
+
 
   const handleChange = event => {
     const {name, value} = event.target
-    setValues({...value, [name]: value})
+    setValues({...values, [name]: value})
+  }
+
+  const handleSubmit = event => {
+    event.preventDefault()
+    axios.post("https://lambdamud-crawler.herokuapp.com/api/login/", values)
+      .then(res => {
+        console.log(res)
+        localStorage.setItem('token', res.data.token)
+        props.history.push('/game')
+      }).catch(err => console.log(err))
   }
 
   return (
     <div>
-      <p>Register Page</p>
+      <p>Login Page</p>
       <form>
         <input
           name="username"
@@ -27,7 +39,7 @@ export default function Login() {
           value={values.password}
          />
       </form>
-      <button type="submit" onClick="handleSubmit">
+      <button type="submit" onClick={handleSubmit}>
         Submit
       </button>
     </div>
