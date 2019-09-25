@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import axios from 'axios'
 
-export default function Login(props) {
-  const [values, setValues] = useState({username: "", password: ""})
-
+export default function Register() {
+  const [values, setValues] = useState({username: "", password: "", confirmpassword: ""})
 
   const handleChange = event => {
     const {name, value} = event.target
@@ -16,13 +15,12 @@ export default function Login(props) {
       .then(res => {
         console.log(res)
         localStorage.setItem('token', res.data.token)
-        props.history.push('/game')
       }).catch(err => console.log(err))
   }
 
   return (
     <div>
-      <p>Login Page</p>
+      <p>Register Page</p>
       <form>
         <input
           name="username"
@@ -37,6 +35,13 @@ export default function Login(props) {
           placeholder="password"
           onChange={handleChange}
           value={values.password}
+         />
+         <input 
+          name="confirmpassword"
+          type="password"
+          placeholder="confirm password"
+          onChange={handleChange}
+          value={values.confirmpassword}
          />
       </form>
       <button type="submit" onClick={handleSubmit}>
