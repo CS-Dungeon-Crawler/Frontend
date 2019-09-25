@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Konva from 'konva'
-
+import axios from 'axios'
 export default function Movement() {
   const stage = new Konva.Stage({
     container: 'root',
@@ -47,9 +47,36 @@ export default function Movement() {
     e.preventDefault();
     layer.batchDraw();
   });
-  return (
-    <div>
-      
-    </div>
-  )
+// ------------------------------------
+  const [values, setValues] = useState({rooms:{}})
+
+  function setHeaders() {
+    const token = `Token ${localStorage.getItem('jwt')}`;
+    const headers = { Authorization: token };
+    return headers;
+  }
+
+  const headers = setHeaders();
+  console.log(headers)
+
+
+  const fetchRooms = () => {
+      axios
+        .post('https://lambdamud-crawler.herokuapp.com/api/adv/genworld/', {size:20},  headers.Authorization )
+        .then(res => {
+          console.log(res)
+        })
+        .catch(err => console.log(err))
+      }
+
+  fetchRooms()
+
+    return (
+      <div>
+        Select Size of Room
+      </div>
+    )
+  
+
+
 }

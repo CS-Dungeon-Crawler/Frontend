@@ -11,7 +11,7 @@ export default function Register() {
 
   const handleSubmit = event => {
     event.preventDefault()
-    axios.post("https://lambdamud-crawler.herokuapp.com/api/login/", values)
+    axios.post("https://lambdamud-crawler.herokuapp.com/api/auth/login/", values)
       .then(res => {
         console.log(res)
         localStorage.setItem('token', res.data.token)
