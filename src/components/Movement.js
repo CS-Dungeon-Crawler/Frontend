@@ -52,17 +52,21 @@ export default function Movement() {
 
   function setHeaders() {
     const token = `Token ${localStorage.getItem('jwt')}`;
-    const headers = { Authorization: token };
-    return headers;
+    const auth = { Authorization: token };
+    return auth;
   }
 
-  const headers = setHeaders();
-  console.log(headers)
+  const auth = setHeaders();
+  // console.log(headers)
 
 
   const fetchRooms = () => {
+    // const token = `Token ${localStorage.getItem('jwt')}`;
       axios
-        .post('https://lambdamud-crawler.herokuapp.com/api/adv/genworld/', {size:20},  headers.Authorization )
+        .post('https://cors-anywhere.herokuapp.com/https://lambdamud-crawler.herokuapp.com/api/adv/genworld/', {size:20},  {headers: {
+          auth,
+          'Content-Type': 'application/json;charset=UTF-8',
+        }})
         .then(res => {
           console.log(res)
         })
