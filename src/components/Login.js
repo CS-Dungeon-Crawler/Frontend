@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import axios from 'axios'
 
 export default function Login(props) {
@@ -14,7 +14,6 @@ export default function Login(props) {
     event.preventDefault()
     axios.post("https://lambdamud-crawler.herokuapp.com/api/auth/login/", values)
       .then(res => {
-        // console.log(res)
         localStorage.setItem('token', res.data.token)
         props.history.push('/game')
       }).catch(err => console.log(err))

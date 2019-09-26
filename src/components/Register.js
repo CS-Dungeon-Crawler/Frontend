@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 
-export default function Register() {
-  const [values, setValues] = useState({username: "", password: "", confirmpassword: ""})
+export default function Register(props) {
+  const [values, setValues] = useState({username: "", password1: "", password2: ""})
 
   const handleChange = event => {
     const {name, value} = event.target
@@ -11,11 +11,12 @@ export default function Register() {
 
   const handleSubmit = event => {
     event.preventDefault()
-    axios.post("https://lambdamud-crawler.herokuapp.com/api/auth/login/", values)
+    axios.post("https://lambdamud-crawler.herokuapp.com/api/auth/register/", values)
       .then(res => {
-        console.log(res)
+        console.log("success", res)
         localStorage.setItem('token', res.data.token)
-      }).catch(err => console.log(err))
+        props.history.push('/game')
+      }).catch(err => console.log("what the f?", err))
   }
 
   return (
@@ -30,18 +31,18 @@ export default function Register() {
           value={values.username}
          />
          <input
-          name="password"
+          name="password1"
           type="password"
           placeholder="password"
           onChange={handleChange}
-          value={values.password}
+          value={values.password1}
          />
          <input 
-          name="confirmpassword"
+          name="password2"
           type="password"
           placeholder="confirm password"
           onChange={handleChange}
-          value={values.confirmpassword}
+          value={values.password2}
          />
       </form>
       <button type="submit" onClick={handleSubmit}>
