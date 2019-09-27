@@ -1,6 +1,34 @@
 import React, { useEffect, useState } from 'react'
-import Konva from 'konva'
+// import Konva from 'konva'
 import axios from 'axios'
+// import ArrowKeysReact from 'arrow-keys-react'
+
+//hooks
+
+function useKey(key) {
+  const [pressed, setPressed] = useState(false)
+
+  const match = event => key.toLowerCase() == event.key.toLowerCase()
+
+  const onDown = event => {
+    if(match(event)) setPressed(true)
+  }
+
+  const onUp = event => {
+    if(match(event)) setPressed(false)
+  }
+
+  useEffect(() => {
+    window.addEventListener('keydown', onDown)
+    window.addEventListener('keyup', onUp)
+    return () => {
+      window.removeEventListener('keydown', onDown)
+      window.removeEventListener('keyup', onUp)
+    }
+  }, [key])
+
+  return pressed
+}
 
 export default function Movement() {
   // const stage = new Konva.Stage({
@@ -51,7 +79,8 @@ export default function Movement() {
 // ------------------------------------
   const [values, setValues] = useState({rooms:{}})
   const [playerInfo, setPlayerInfo] = useState({})
-
+  const [roomInfo, setRoomInfo] = useState({})
+  const [messageBoard, setMessageBoard] = useState({})
   // function setHeaders() {
   //   const token = `Token ${localStorage.getItem('jwt')}`;
   //   // const token = `Token 2d905f361f8ce895b7df1405a5f3bf823e122a97`;
@@ -66,6 +95,7 @@ export default function Movement() {
   useEffect(() => {
     fetchRooms()
     getInfo()
+    movementInput()
     // console.log(values)
   }, [] )
 
@@ -85,7 +115,7 @@ export default function Movement() {
             }}
         )
         .then(res => {
-          console.log(res)
+          // console.log(res)
           setValues(res.data)
           // console.log(values)
         })
@@ -104,6 +134,7 @@ export default function Movement() {
 
       ).then(res => {
         setPlayerInfo(res.data)
+        setRoomInfo(res.data)
         console.log(res.data)
       })
       .catch(err => console.log(err))
@@ -124,19 +155,48 @@ export default function Movement() {
           'Content-Type': 'application/json;charset=UTF-8'
         }})
         .then(res=>{
-          console.log(res.data)
+          console.log(res)
+          setMessageBoard(res.data)
+          setRoomInfo(res.data.room)
         })
         .catch(err=> console.log(err))
   }
+
+  const down = useKey('arrowdown')
+  const up = useKey('arrowup')
+  const left = useKey('arrowleft')
+  const right = useKey('arrowright')
+
 
 
 
   // fetchRooms()
     return (
       <div>
-        You are in {playerInfo.title}
-        Where do you want to gooooooooo...
-        <button onClick={() => movementInput("n")}>N</button> 
+        {messageBoard.message ? messageBoard.message : null}
+        <br/>
+        {roomInfo.title}
+        <br/>
+        {roomInfo.description}
+        <br/>
+        Where do you want to go...use arrow keys
+        <br/>
+        {/* <button onClick={() => movementInput("n")}>N</button>  */}
+        {down &&
+          movementInput("s")
+        }
+
+        {up &&
+          movementInput("n")
+        }
+
+        {left &&
+          movementInput("w")
+        }
+
+        {right &&
+          movementInput("e")
+        }
       </div>
     )
 
