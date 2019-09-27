@@ -6,6 +6,7 @@ import Navbar from './components/Navbar'
 import Login from './components/Login';
 import Register from './components/Register';
 import Movement from './components/Movement'
+import Map from './components/Map';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Route path="/login" component={Login} />
       <Route path="/register" component={Register} />
       <Route path="/game" component={Movement} />
+      <Route path='/map' component={Map} />
     </div>
   );
 }
