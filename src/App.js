@@ -17,7 +17,7 @@ function App() {
   return (
     <div className="App">
       <h1>Dungeon Crawler</h1>
-      {localStorage.getItem('jwt') ? null : <Navbar />}
+      {localStorage.getItem('token') ? null : <Navbar />}
       <Route path="/login" component={Login} />
       <Route path="/register" component={Register} />
       <Route path="/game" component={Movement} />
