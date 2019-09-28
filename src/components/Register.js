@@ -15,7 +15,7 @@ export default function Register(props) {
       .then(res => {
         console.log("success", res)
         localStorage.setItem('jwt', res.data.key)
-        props.history.push('/game')
+        props.history.push('/map')
       }).catch(err => console.log("what the f?", err))
   }
 
