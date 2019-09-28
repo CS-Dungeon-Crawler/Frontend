@@ -14,7 +14,7 @@ export default function Login(props) {
     event.preventDefault()
     axios.post("https://lambdamud-crawler.herokuapp.com/api/auth/login/", values)
       .then(res => {
-        localStorage.setItem('token', res.data.key)
+        localStorage.setItem('jwt', res.data.key)
         props.history.push('/game')
       }).catch(err => console.log(err))
   }
