@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import axios from 'axios'
-import axiosWithAuth from '../util/axiosWithAuth'
 
 export default function Login(props) {
   const [values, setValues] = useState({username: "", password: ""})
@@ -13,10 +12,10 @@ export default function Login(props) {
 
   const handleSubmit = event => {
     event.preventDefault()
-    axiosWithAuth().post("/api/auth/login/", values)
+    axios.post("https://lambdamud-crawler.herokuapp.com/api/auth/login/", values)
       .then(res => {
-        localStorage.setItem('jwt', res.data.key)
-        props.history.push('/game')
+        localStorage.setItem('token', res.data.key)
+        props.history.push('/map')
       }).catch(err => console.log(err))
   }
 

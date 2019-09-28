@@ -10,7 +10,7 @@ import Navbar from './components/Navbar'
 import Login from './components/Login';
 import Register from './components/Register';
 import Movement from './components/Movement'
-import Map from './components/Map';
+import DungeonMap from './components/Map';
 
 
 function App() {
@@ -21,7 +21,7 @@ function App() {
       <Route path="/login" component={Login} />
       <Route path="/register" component={Register} />
       <Route path="/game" component={Movement} />
-      <Route path='/map' component={Map} />
+      <Route path='/map' component={DungeonMap} />
     </div>
   );
 }
