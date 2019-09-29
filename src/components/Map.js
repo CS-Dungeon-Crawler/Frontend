@@ -4,9 +4,11 @@ import { Stage, Layer, Rect, Circle, Text } from 'react-konva'
 import axiosWithAuth from '../util/axiosWithAuth';
 // import axios from 'axios'
 
+import ItemList from './Inventory';
+
 export default function Map() {
   const [rooms, setRooms] = useState([])
-  const [player, setPlayer] = useState({})
+  const [player, setPlayer] = useState({inventory: [], treasure: []})
   const [dots, setDots] = useState([])
   useEffect(() => {
     fetchRooms();
@@ -84,23 +86,25 @@ export default function Map() {
         </Stage>
       </div>
       <div className='game-controls'>
-        <div>
+        {/* <div>
           {player.inventory && player.inventory.map(item => (
             <p>{item.name}   <span onClick={() => drop(item.id)}>X</span></p>
           ))}
-        </div>
+        </div> */}
+        <ItemList inventory={player.inventory} interact={drop} />
         <div className='btn-group'>
           <button id='north-btn' onClick={() => move('n')}>North</button>
           <button id='west-btn' onClick={() => move('w')}>West</button>
           <button id='south-btn' onClick={() => move('s')}>South</button>
           <button id='east-btn' onClick={() => move('e')}>East</button>
         </div>
-        <div>
+        <ItemList full={player.inventory.length < 5 ? false : true} inventory={player.treasure} interact={take} />
+        {/* <div>
           <p>{player.name}</p>
           {player.treasure && player.treasure.map(item => (
             <p>{item.name}  {player.inventory.length < 5 && <span onClick={() => take(item.id)}>X</span>}</p>
           ))}
-        </div>
+        </div> */}
       </div>
     </div>
   )

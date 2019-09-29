@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css?family=Grenze:400,700&display=swap");
 .App {
   text-align: center;
 }
@@ -40,4 +41,11 @@
   grid-template-areas:
     "  .  north   .   "
     "west south east  ";
+}
+
+.item-list {
+  font-family: "Grenze", serif;
+  height: 205px;
+  width: 60%;
+  box-shadow: inset 1px 1px 5px rgba(0, 0, 0, 0.308);
 }

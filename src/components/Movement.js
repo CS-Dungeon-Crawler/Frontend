@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 // import Konva from 'konva'
 import axios from 'axios'
 import axiosWithAuth from '../util/axiosWithAuth';
+import Map from './Map';
 // import ArrowKeysReact from 'arrow-keys-react'
 
 //hooks
@@ -166,6 +167,7 @@ export default function Movement() {
         <br/>
         Where do you want to go...use arrow keys
         <br/>
+        <Map />
         {/* <button onClick={() => movementInput("n")}>N</button>  */}
         {down &&
           movementInput("s")
