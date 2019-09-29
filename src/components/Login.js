@@ -16,6 +16,7 @@ export default function Login(props) {
       .then(res => {
         localStorage.setItem('token', res.data.key)
         props.history.push('/map')
+
       }).catch(err => console.log(err))
   }
 

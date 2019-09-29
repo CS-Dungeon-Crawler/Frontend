@@ -17,10 +17,11 @@ function App() {
   return (
     <div className="App">
       <h1>Dungeon Crawler</h1>
-      {localStorage.getItem('token') ? null : <Navbar />}
+      {/* <Route path = '/' component={Navbar} /> */}
+      {localStorage.getItem('token') ? null : <Route path = '/' component={Navbar} />}
       <Route path="/login" component={Login} />
       <Route path="/register" component={Register} />
-      <Route path="/game" component={Movement} />
+      {/* <Route path="/game" component={Movement} /> */}
       <Route path='/map' component={DungeonMap} />
     </div>
   );
