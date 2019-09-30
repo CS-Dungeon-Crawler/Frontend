@@ -1,19 +1,16 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 
+import '../CSS/loginRegNav.css'
+
+
 export default function Navbar() {
 
   return (
-    <div>
+    <div className="mainNavDiv">
       <nav>
-        <ul>
-          <li className="mainnav-link">
-            <NavLink to="/register">Register</NavLink>
-          </li>
-          <li className="mainnav-link">
-            <NavLink to="/login">Login</NavLink>
-          </li>
-        </ul>
+          <NavLink to="/register" className="navButton" >Register</NavLink>
+          <NavLink to="/login" className="navButton">Login</NavLink>
       </nav>
     </div>
   )

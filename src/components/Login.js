@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 
+import '../CSS/loginRegNav.css'
+
 export default function Login(props) {
   const [values, setValues] = useState({username: "", password: ""})
 
@@ -15,14 +17,14 @@ export default function Login(props) {
     axios.post("https://lambdamud-crawler.herokuapp.com/api/auth/login/", values)
       .then(res => {
         localStorage.setItem('token', res.data.key)
-        props.history.push('/map')
-
+        window.location = ('/map')
+        
       }).catch(err => console.log(err))
   }
 
   return (
     <div>
-      <p>Login Page</p>
+      {/* <p>Login Page</p> */}
       <form>
         <input
           name="username"
@@ -30,6 +32,7 @@ export default function Login(props) {
           placeholder="username"
           onChange={handleChange}
           value={values.username}
+          className="inputField"
          />
          <input
           name="password"
@@ -37,9 +40,11 @@ export default function Login(props) {
           placeholder="password"
           onChange={handleChange}
           value={values.password}
+          className="inputField"
+
          />
       </form>
-      <button type="submit" onClick={handleSubmit}>
+      <button type="submit" onClick={handleSubmit} className="navButton">
         Submit
       </button>
     </div>

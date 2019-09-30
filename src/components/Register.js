@@ -21,7 +21,7 @@ export default function Register(props) {
 
   return (
     <div>
-      <p>Register Page</p>
+      {/* <p>Register Page</p> */}
       <form>
         <input
           name="username"
@@ -29,12 +29,15 @@ export default function Register(props) {
           placeholder="username"
           onChange={handleChange}
           value={values.username}
+          className="inputField"
+
          />
          <input
           name="password1"
           type="password"
           placeholder="password"
           onChange={handleChange}
+          className="inputField"
           value={values.password1}
          />
          <input 
@@ -43,9 +46,11 @@ export default function Register(props) {
           placeholder="confirm password"
           onChange={handleChange}
           value={values.password2}
+          className="inputField"
+
          />
       </form>
-      <button type="submit" onClick={handleSubmit}>
+      <button type="submit" onClick={handleSubmit} className="navButton">
         Submit
       </button>
     </div>

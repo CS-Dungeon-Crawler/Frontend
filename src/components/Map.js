@@ -38,7 +38,7 @@ export default function Map() {
 
   function logout(ev) {
     localStorage.removeItem('token');
-    window.location = ('/login');
+    window.location = ('/');
   }
 
   const [rooms, setRooms] = useState([])

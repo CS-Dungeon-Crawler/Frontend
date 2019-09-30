@@ -1,0 +1,81 @@
+/* APP JS CSS */
+body {
+    display: flex;
+    justify-content: center;
+
+}
+.mainTitleDiv {
+    display: flex;
+    flex-direction: column;
+    /* background-image: url("http://giphygifs.s3.amazonaws.com/media/FPlzp50M94WFW/giphy.gif"); */
+    background-size: 1000px 500px;
+    background-repeat: no-repeat;
+
+    height: 300px;
+    width: 1000px;
+    padding: 80px 0px 0px 0px;
+}
+
+.mainTitle {
+    font-size: 60px;
+    margin: 0px 0px 50px 0px;
+    font-family: '8BITWONDERNominal';
+    font-weight: normal;
+    font-style: normal;
+    color: gray;
+
+}
+
+
+
+/* mainNav CSS */
+.mainNavDiv {
+    display:flex;
+    justify-content: center;
+    flex-direction: row;
+}
+        .navButton {
+            margin: 0px 10px 0px 10px;
+            padding: 10px 30px 10px 30px;
+            height: 60px;
+            background-color: darkgray;
+            background-image: url("../photos/stonewall.png");
+            background-repeat: no-repeat;
+            background-position: right top;
+            border: 3px solid gray;
+            font-size: 30px;
+            font-family: '8BITWONDERNominal';
+            font-weight: normal;
+            font-style: normal;
+            color: white;
+            text-decoration: none;
+            transition: 0.3s;
+            /* background-color: black; */
+        }
+                .navButton:hover {
+                    color:black;
+                }
+
+/* login and reg CSS */
+
+.inputField {
+    height: 30px;
+    width: 200px;
+    text-align: center;
+    margin: 30px 5px 30px 5px;
+    border: 3px solid black;
+}
+        .inputField[type='text'] {
+            font-size: 10px;
+            font-family: '8BITWONDERNominal';
+            font-weight: normal;
+            font-style: normal;
+            color:black;
+        }
+        .inputField[type='password'] {
+            font-size: 10px;
+            font-family: '8BITWONDERNominal';
+            font-weight: normal;
+            font-style: normal;
+            color:black;
+        }
