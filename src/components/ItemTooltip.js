@@ -18,7 +18,9 @@ function ItemTooltip({item}) {
   
   return (
     <div className='item-tooltip'>
-      {attribute.name}  {attribute.value}
+      <h3>{item.name}</h3>
+      <p>{item.description}</p>
+      {attribute.name}:  {attribute.value}
     </div>
   )
 }

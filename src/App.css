@@ -8,6 +8,17 @@
 * {
   box-sizing: border-box;
 }
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+}
+
 .App {
   text-align: center;
   font-family: "Grenze", serif;
@@ -105,15 +116,19 @@
   font-weight: bold;
   background-color: black;
   text-align: left;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
-.item-list p {
+.item-card {
   position: relative;
+  height: 30px;
   margin: 10px 10px;
   padding-left: 3px;
   background-image: var(--old-parchment);
   border: 2px solid rgba(119, 76, 8, 0.301);
+}
+.item-card p {
+  margin: 0;
 }
 
 .item-list span {
@@ -121,6 +136,21 @@
   right: 5px;
 }
 
+.item-card {
+  position: relative;
+}
+
 .item-tooltip {
-  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  text-align: center;
+  position: fixed;
+  width: 200px;
+  height: 120px;
+  left: 65%;
+  top: 50px;
+  color: #000;
+  background-image: var(--old-parchment);
 }
