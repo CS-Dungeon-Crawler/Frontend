@@ -70,6 +70,10 @@
   margin-top: 128px;
 }
 
+.item-title {
+  margin: 0;
+}
+
 #north-btn {
   grid-area: north;
 }
@@ -115,4 +119,8 @@
 .item-list span {
   position: absolute;
   right: 5px;
+}
+
+.item-tooltip {
+  color: #fff;
 }

@@ -142,13 +142,15 @@ export default function Map() {
             <p>{item.name}   <span onClick={() => drop(item.id)}>X</span></p>
           ))}
         </div> */}
+        <h2 className='item-title'>Player Inventory:</h2>
         <ItemList inventory={player.inventory} interact={drop} />
-        <div className='btn-group'>
+        {/* <div className='btn-group'>
           <button id='north-btn' onClick={() => movementInput('n')}>North</button>
           <button id='west-btn' onClick={() => movementInput('w')}>West</button>
           <button id='south-btn' onClick={() => movementInput('s')}>South</button>
           <button id='east-btn' onClick={() => movementInput('e')}>East</button>
-        </div>
+        </div> */}
+        <h2 className='item-title'>Treasure:</h2>
         <ItemList full={player.inventory.length < 5 ? false : true} inventory={player.treasure} interact={take} />
         {/* <div>
           <p>{player.name}</p>
