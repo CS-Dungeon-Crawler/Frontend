@@ -83,6 +83,7 @@ export default function Movement() {
   const [playerInfo, setPlayerInfo] = useState({})
   const [roomInfo, setRoomInfo] = useState({})
   const [messageBoard, setMessageBoard] = useState({})
+  
   // function setHeaders() {
   //   const token = `Token ${localStorage.getItem('jwt')}`;
   //   // const token = `Token 2d905f361f8ce895b7df1405a5f3bf823e122a97`;
@@ -126,7 +127,7 @@ export default function Movement() {
       ).then(res => {
         setPlayerInfo(res.data)
         setRoomInfo(res.data)
-        console.log(res.data)
+        // console.log(res.data)
       })
       .catch(err => console.log(err))
   }
@@ -141,7 +142,7 @@ export default function Movement() {
         {direction:e}
         )
         .then(res=>{
-          console.log(res)
+          // console.log(res)
           setMessageBoard(res.data)
           setRoomInfo(res.data.room)
         })

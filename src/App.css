@@ -1,6 +1,16 @@
 @import url("https://fonts.googleapis.com/css?family=Grenze:400,700&display=swap");
+
+:root {
+  --old-parchment: url("http://i.stack.imgur.com/kb0Zm.jpg");
+  --inset-shadow: inset -3px -3px 1px rgba(207, 207, 190, 0.685),
+    inset 3px 3px 5px rgb(133, 133, 130);
+}
+* {
+  box-sizing: border-box;
+}
 .App {
   text-align: center;
+  font-family: "Grenze", serif;
 }
 
 .game-hud {
@@ -10,7 +20,45 @@
 .map-display {
   display: flex;
   flex-direction: column;
+  align-items: center;
   width: 60%;
+}
+
+.room-description {
+  background-image: var(--old-parchment);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin: 0;
+  width: 490px;
+  height: 120px;
+}
+.room-description p {
+  margin: 0;
+  text-align: center;
+}
+.room-description p:nth-of-type(1) {
+  width: 80%;
+  font-size: 1.6rem;
+  border-bottom: 2px solid rgb(138, 74, 2);
+}
+.room-description p:nth-of-type(2) {
+  /* height: 75px; */
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+}
+
+.map-container,
+.room-description {
+  border: 5px solid #000;
+}
+
+.map-container {
+  background-image: url("http://i.stack.imgur.com/kb0Zm.jpg");
+  /* background-color: var(--old-parchment); */
+  box-shadow: var(--inset-shadow);
+  /* margin-top: 10px; */
 }
 
 .game-controls {
@@ -19,6 +67,7 @@
   align-items: center;
   justify-content: space-around;
   width: 30%;
+  margin-top: 128px;
 }
 
 #north-btn {
@@ -44,8 +93,26 @@
 }
 
 .item-list {
-  font-family: "Grenze", serif;
+  /* font-family: "Grenze", serif; */
   height: 205px;
-  width: 60%;
-  box-shadow: inset 1px 1px 5px rgba(0, 0, 0, 0.308);
+  width: 68%;
+  box-shadow: var(--inset-shadow);
+  /* color: yellow; */
+  font-weight: bold;
+  background-color: black;
+  text-align: left;
+  overflow: hidden;
+}
+
+.item-list p {
+  position: relative;
+  margin: 10px 10px;
+  padding-left: 3px;
+  background-image: var(--old-parchment);
+  border: 2px solid rgba(119, 76, 8, 0.301);
+}
+
+.item-list span {
+  position: absolute;
+  right: 5px;
 }

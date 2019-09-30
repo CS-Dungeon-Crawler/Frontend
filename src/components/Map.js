@@ -6,6 +6,32 @@ import axiosWithAuth from '../util/axiosWithAuth';
 
 import ItemList from './Inventory';
 
+function useKey(key) {
+  const [pressed, setPressed] = useState(false)
+
+  const match = event => key.toLowerCase() == event.key.toLowerCase()
+
+  const onDown = event => {
+    if(match(event)) setPressed(true)
+  }
+
+  const onUp = event => {
+    if(match(event)) setPressed(false)
+  }
+
+  useEffect(() => {
+    window.addEventListener('keydown', onDown)
+    window.addEventListener('keyup', onUp)
+    return () => {
+      window.removeEventListener('keydown', onDown)
+      window.removeEventListener('keyup', onUp)
+    }
+  }, [key])
+
+  return pressed
+}
+
+
 export default function Map() {
   const [rooms, setRooms] = useState([])
   const [player, setPlayer] = useState({inventory: [], treasure: []})
@@ -13,6 +39,7 @@ export default function Map() {
   useEffect(() => {
     fetchRooms();
     initiate();
+    movementInput();
   }, [])
 
   useEffect(() => {
@@ -32,7 +59,7 @@ export default function Map() {
   const drawGrid = () => {
     const dotsArr = []
     const num = Math.sqrt(rooms.length);
-    const space = 580 / num;
+    const space = (480) / (num + 1);
     let roomIndex = 0
 
     for(let y = 1; y <= num; y ++) {
@@ -54,15 +81,32 @@ export default function Map() {
     setDots(dotsArr);
   } 
 
-  const move = async(direction) => {
-    try {
-      await axiosWithAuth().post('/api/adv/move/', {direction})
-      initiate()
-      // console.log(resArr)
-    } catch(err) {
-      console.log(err)
-    }
+  // const move = async(direction) => {
+  //   try {
+  //     await axiosWithAuth().post('/api/adv/move/', {direction})
+  //     initiate()
+  //     // console.log(resArr)
+  //   } catch(err) {
+  //     console.log(err)
+  //   }
+  // }
+
+  const movementInput = (e) => {
+    axiosWithAuth()
+      .post(
+        '/api/adv/move/',
+        {direction:e}
+        )
+        .then(res=>{
+          // console.log(res)
+          // setMessageBoard(res.data)
+          // setRoomInfo(res.data.room)
+          initiate();
+        })
+        .catch(err=> console.log(err))
   }
+
+
 
   const take = async(id) => {
     await axiosWithAuth().post('/api/adv/take', {id})
@@ -74,12 +118,19 @@ export default function Map() {
     initiate();
   }
 
+  const down = useKey('arrowdown')
+  const up = useKey('arrowup')
+  const left = useKey('arrowleft')
+  const right = useKey('arrowright')
+
   return (
     <div className='game-hud'>
       <div className='map-display'>
-        <p>{player.title}</p>
-        <p>{player.description}</p>
-        <Stage width={600} height={600}>
+        <div className='room-description'>
+          <p>{player.title}</p>
+          <p>{player.description}</p>
+        </div>
+        <Stage width={480} height={480} className="map-container">
           <Layer>
             {rooms.length === 0 ? <Text test='Loading' fontSize={26} /> : dots}
           </Layer>
@@ -93,10 +144,10 @@ export default function Map() {
         </div> */}
         <ItemList inventory={player.inventory} interact={drop} />
         <div className='btn-group'>
-          <button id='north-btn' onClick={() => move('n')}>North</button>
-          <button id='west-btn' onClick={() => move('w')}>West</button>
-          <button id='south-btn' onClick={() => move('s')}>South</button>
-          <button id='east-btn' onClick={() => move('e')}>East</button>
+          <button id='north-btn' onClick={() => movementInput('n')}>North</button>
+          <button id='west-btn' onClick={() => movementInput('w')}>West</button>
+          <button id='south-btn' onClick={() => movementInput('s')}>South</button>
+          <button id='east-btn' onClick={() => movementInput('e')}>East</button>
         </div>
         <ItemList full={player.inventory.length < 5 ? false : true} inventory={player.treasure} interact={take} />
         {/* <div>
@@ -106,6 +157,14 @@ export default function Map() {
           ))}
         </div> */}
       </div>
+
+        {down && movementInput("s") }
+
+        {up && movementInput("n") }
+
+        {left && movementInput("w") }
+
+        {right && movementInput("e") } 
     </div>
   )
 }
