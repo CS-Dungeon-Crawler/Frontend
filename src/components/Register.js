@@ -22,7 +22,7 @@ export default function Register(props) {
   return (
     <div>
       <p>Register Page</p>
-      <form>
+      <form onSubmit={handleSubmit}>
         <input
           name="username"
           type="text"
@@ -44,10 +44,11 @@ export default function Register(props) {
           onChange={handleChange}
           value={values.password2}
          />
+        <button type="submit">
+          Submit
+        </button>
       </form>
-      <button type="submit" onClick={handleSubmit}>
-        Submit
-      </button>
+
     </div>
   )
 }

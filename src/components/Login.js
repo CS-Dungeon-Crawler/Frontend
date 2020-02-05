@@ -22,7 +22,7 @@ export default function Login(props) {
   return (
     <div>
       <p>Login Page</p>
-      <form>
+      <form onSubmit={handleSubmit}>
         <input
           name="username"
           type="text"
@@ -37,10 +37,11 @@ export default function Login(props) {
           onChange={handleChange}
           value={values.password}
          />
+        <button type="submit">
+          Submit
+        </button>
       </form>
-      <button type="submit" onClick={handleSubmit}>
-        Submit
-      </button>
+
     </div>
   )
 }
