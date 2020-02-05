@@ -14,8 +14,8 @@ export default function Register(props) {
     axios.post("https://lambdamud-crawler.herokuapp.com/api/auth/register/", values)
       .then(res => {
         console.log("success", res)
-        localStorage.setItem('token', res.data.token)
-        props.history.push('/game')
+        localStorage.setItem('jwt', res.data.key)
+        props.history.push('/map')
       }).catch(err => console.log("what the f?", err))
   }
 

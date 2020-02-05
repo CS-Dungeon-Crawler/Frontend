@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 // import Konva from 'konva'
 import axios from 'axios'
+import axiosWithAuth from '../util/axiosWithAuth';
+import Map from './Map';
 // import ArrowKeysReact from 'arrow-keys-react'
 
 //hooks
@@ -81,6 +83,7 @@ export default function Movement() {
   const [playerInfo, setPlayerInfo] = useState({})
   const [roomInfo, setRoomInfo] = useState({})
   const [messageBoard, setMessageBoard] = useState({})
+  
   // function setHeaders() {
   //   const token = `Token ${localStorage.getItem('jwt')}`;
   //   // const token = `Token 2d905f361f8ce895b7df1405a5f3bf823e122a97`;
@@ -101,21 +104,16 @@ export default function Movement() {
 
   const fetchRooms = () => {
     // const token = `Token ${localStorage.getItem('jwt')}`;
-      axios
+      axiosWithAuth()
         .get(
         // .post(
-            'https://cors-anywhere.herokuapp.com/https://lambdamud-crawler.herokuapp.com/api/rooms/',
+            '/api/rooms/',
             // 'https://cors-anywhere.herokuapp.com/https://lambdamud-crawler.herokuapp.com/api/adv/init/',
             // 'https://cors-anywhere.herokuapp.com/https://lambdamud-crawler.herokuapp.com/api/adv/move/',
             // {direction:"n"},
-            { headers: {
-              // auth,
-              "Authorization": `Token ${localStorage.getItem('jwt')}`,
-              'Content-Type': 'application/json;charset=UTF-8'
-            }}
         )
         .then(res => {
-          // console.log(res)
+          console.log(res)
           setValues(res.data)
           // console.log(values)
         })
@@ -123,19 +121,13 @@ export default function Movement() {
       }
 
   const getInfo = () => {
-    axios
+    axiosWithAuth()
       .get(
-          'https://cors-anywhere.herokuapp.com/https://lambdamud-crawler.herokuapp.com/api/adv/init/',
-          { headers: {
-            // auth,
-            "Authorization": `Token ${localStorage.getItem('jwt')}`,
-            'Content-Type': 'application/json;charset=UTF-8'
-          }}
-
+          '/api/adv/init/',
       ).then(res => {
         setPlayerInfo(res.data)
         setRoomInfo(res.data)
-        console.log(res.data)
+        // console.log(res.data)
       })
       .catch(err => console.log(err))
   }
@@ -144,18 +136,13 @@ export default function Movement() {
 
 
   const movementInput = (e) => {
-    axios
+    axiosWithAuth()
       .post(
-        'https://cors-anywhere.herokuapp.com/https://lambdamud-crawler.herokuapp.com/api/adv/move/',
-
-        {direction:e},
-
-        { headers: {
-          "Authorization": `Token ${localStorage.getItem('jwt')}`,
-          'Content-Type': 'application/json;charset=UTF-8'
-        }})
+        '/api/adv/move/',
+        {direction:e}
+        )
         .then(res=>{
-          console.log(res)
+          // console.log(res)
           setMessageBoard(res.data)
           setRoomInfo(res.data.room)
         })
@@ -181,6 +168,7 @@ export default function Movement() {
         <br/>
         Where do you want to go...use arrow keys
         <br/>
+        <Map />
         {/* <button onClick={() => movementInput("n")}>N</button>  */}
         {down &&
           movementInput("s")

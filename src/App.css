@@ -1,33 +1,156 @@
+@import url("https://fonts.googleapis.com/css?family=Grenze:400,700&display=swap");
+
+:root {
+  --old-parchment: url("http://i.stack.imgur.com/kb0Zm.jpg");
+  --inset-shadow: inset -3px -3px 1px rgba(207, 207, 190, 0.685),
+    inset 3px 3px 5px rgb(133, 133, 130);
+}
+* {
+  box-sizing: border-box;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+}
+
 .App {
   text-align: center;
+  font-family: "Grenze", serif;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
+.game-hud {
+  display: flex;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.map-display {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  width: 60%;
 }
 
-.App-link {
-  color: #61dafb;
+.room-description {
+  background-image: var(--old-parchment);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin: 0;
+  width: 490px;
+  height: 120px;
+}
+.room-description p {
+  margin: 0;
+  text-align: center;
+}
+.room-description p:nth-of-type(1) {
+  width: 80%;
+  font-size: 1.6rem;
+  border-bottom: 2px solid rgb(138, 74, 2);
+}
+.room-description p:nth-of-type(2) {
+  /* height: 75px; */
+  margin-bottom: 10px;
+  font-size: 1.1rem;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.map-container,
+.room-description {
+  border: 5px solid #000;
+}
+
+.map-container {
+  background-image: url("http://i.stack.imgur.com/kb0Zm.jpg");
+  /* background-color: var(--old-parchment); */
+  box-shadow: var(--inset-shadow);
+  /* margin-top: 10px; */
+}
+
+.game-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  width: 30%;
+  margin-top: 128px;
+}
+
+.item-title {
+  margin: 0;
+}
+
+#north-btn {
+  grid-area: north;
+}
+#south-btn {
+  grid-area: south;
+}
+#west-btn {
+  grid-area: west;
+}
+#east-btn {
+  grid-area: east;
+}
+
+.btn-group {
+  display: grid;
+  grid-template-columns: 50px 50px 50px;
+  grid-template-rows: auto;
+  grid-template-areas:
+    "  .  north   .   "
+    "west south east  ";
+}
+
+.item-list {
+  /* font-family: "Grenze", serif; */
+  height: 205px;
+  width: 68%;
+  box-shadow: var(--inset-shadow);
+  /* color: yellow; */
+  font-weight: bold;
+  background-color: black;
+  text-align: left;
+  /* overflow: hidden; */
+}
+
+.item-card {
+  position: relative;
+  height: 30px;
+  margin: 10px 10px;
+  padding-left: 3px;
+  background-image: var(--old-parchment);
+  border: 2px solid rgba(119, 76, 8, 0.301);
+}
+.item-card p {
+  margin: 0;
+}
+
+.item-list span {
+  position: absolute;
+  right: 5px;
+}
+
+.item-card {
+  position: relative;
+}
+
+.item-tooltip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  text-align: center;
+  position: fixed;
+  width: 200px;
+  height: 120px;
+  left: 65%;
+  top: 50px;
+  color: #000;
+  background-image: var(--old-parchment);
 }
